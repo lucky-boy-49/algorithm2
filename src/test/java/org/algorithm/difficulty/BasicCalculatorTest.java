@@ -2,8 +2,6 @@ package org.algorithm.difficulty;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BasicCalculatorTest {
 
     @Test
