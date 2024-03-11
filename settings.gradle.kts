@@ -1,2 +1,2 @@
-rootProject.name = "alogorithm"
+rootProject.name = "algorithm2"
 
