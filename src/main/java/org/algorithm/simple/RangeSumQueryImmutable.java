@@ -1,7 +1,7 @@
 package org.algorithm.simple;
 
 /**
- * 303. 区域和检索 - 数组不可变
+ * 303.区域和检索-数组不可变
  * @author 贺佳
  */
 public class RangeSumQueryImmutable {
