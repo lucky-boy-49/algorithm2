@@ -17,8 +17,8 @@ public class Graph {
     public Graph(int n, int[][] edges) {
         dist = new int[n][n];
         this.n = n;
-        Arrays.stream(dist).forEach(a -> Arrays.fill(a, MAX));
         for (int i = 0; i < n; i++) {
+            Arrays.fill(dist[i], MAX);
             dist[i][i] = 0;
         }
         Arrays.stream(edges).forEach(a -> dist[a[0]][a[1]] = a[2]);
@@ -44,8 +44,11 @@ public class Graph {
     private void floyd() {
         for (int k = 0; k < n; k++) {
             for (int i = 0; i < n; i++) {
+                if (dist[i][k] == MAX) {
+                    continue;
+                }
                 for (int j = 0; j < n; j++) {
-                    dist[i][j] = Math.min(dist[i][j], Math.min(dist[i][k] + dist[k][j], MAX));
+                    dist[i][j] = Math.min(dist[i][j], dist[i][k] + dist[k][j]);
                 }
             }
         }
