@@ -21,9 +21,7 @@ public class Graph {
         for (int i = 0; i < n; i++) {
             dist[i][i] = 0;
         }
-        Arrays.stream(edges).forEach(a -> {
-            dist[a[0]][a[1]] = a[2];
-        });
+        Arrays.stream(edges).forEach(a -> dist[a[0]][a[1]] = a[2]);
         floyd();
     }
 
