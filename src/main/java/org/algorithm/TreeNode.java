@@ -1,5 +1,9 @@
 package org.algorithm;
 
+/**
+ * 树
+ * @author jiahe
+ */
 public class TreeNode {
 
     public int val;
