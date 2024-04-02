@@ -3,8 +3,6 @@ package org.algorithm.medium;
 import org.algorithm.TreeNode;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AllPossibleFBTTest {
 
     @Test
