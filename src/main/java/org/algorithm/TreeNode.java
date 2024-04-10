@@ -1,5 +1,9 @@
 package org.algorithm;
 
+/**
+ * 树
+ * @author jiahe
+ */
 public class TreeNode {
 
     public int val;
@@ -18,5 +22,11 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public String toString() {
+        return val + "," + (left == null ? "null" : left.toString())
+                + "," + (right == null ? "null" : right.toString());
     }
 }
