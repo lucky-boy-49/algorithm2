@@ -9,40 +9,35 @@ import org.algorithm.Node;
 public class ConstructQuadTree {
 
     public Node construct(int[][] grid) {
-        return dfs(0, grid.length - 1, 0, grid[0].length - 1, grid);
+        return dfs(grid, 0, 0, grid.length, grid.length);
     }
 
-    private Node dfs(int rowT, int rowB, int colL, int colR, int[][] grid) {
-        if (rowB - rowT == 1 && colR - colL == 1) {
-            if (grid[rowT][colL] == grid[rowT][colR] && grid[rowT][colR] == grid[rowB][colR]
-                    && grid[rowB][colR] == grid[rowB][colL]) {
-                return new Node(grid[colL][rowT] == 1, true, null, null, null, null);
-            } else {
-                Node node = new Node(true, false);
-                node.topLeft = new Node(grid[rowT][colL] == 1, true);
-                node.topRight = new Node(grid[rowT][colR] == 1, true);
-                node.bottomLeft = new Node(grid[rowB][colL] == 1, true);
-                node.bottomRight = new Node(grid[rowB][colR] == 1, true);
-                return node;
+    private Node dfs(int[][] grid, int r0, int c0, int r1, int c1) {
+        boolean same = true;
+        for (int i = r0; i < r1; ++i) {
+            for (int j = c0; j < c1; ++j) {
+                if (grid[i][j] != grid[r0][c0]) {
+                    same = false;
+                    break;
+                }
             }
-        } else {
-            int midRow = (rowT + rowB) / 2;
-            int midCol = (colL + colR) / 2;
-            Node topLeft = dfs(rowT, midRow, colL, midCol, grid);
-            Node topRight = dfs(rowT, midRow, midCol + 1, colR, grid);
-            Node bottomLeft = dfs(midRow + 1, rowB, colL, midCol, grid);
-            Node bottomRight = dfs(midRow + 1, rowB, midCol + 1, colR, grid);
-            if (topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val) {
-                return new Node(topLeft.val, true, null, null, null, null);
-            } else {
-                Node node = new Node(true, false);
-                node.topLeft = topLeft;
-                node.topRight = topRight;
-                node.bottomLeft = bottomLeft;
-                node.bottomRight = bottomRight;
-                return node;
+            if (!same) {
+                break;
             }
         }
+
+        if (same) {
+            return new Node(grid[r0][c0] == 1, true);
+        }
+
+        return new Node(
+                true,
+                false,
+                dfs(grid, r0, c0, (r0 + r1) / 2, (c0 + c1) / 2),
+                dfs(grid, r0, (c0 + c1) / 2, (r0 + r1) / 2, c1),
+                dfs(grid, (r0 + r1) / 2, c0, r1, (c0 + c1) / 2),
+                dfs(grid, (r0 + r1) / 2, (c0 + c1) / 2, r1, c1)
+        );
     }
 
 }
